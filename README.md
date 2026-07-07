@@ -1,2 +1,3 @@
-# Remapauto-ai
-Plateforme intelligente de diagnostic remote 
+# RemapAuto AI
+
+Starter website ready for GitHub Pages.
