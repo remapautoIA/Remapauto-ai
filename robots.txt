@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://remapauto-ai.vercel.app/sitemap.xml
