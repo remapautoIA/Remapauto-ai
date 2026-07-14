@@ -1,32 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
 <defs>
-  <linearGradient id="g" x1="0" x2="1">
-    <stop offset="0" stop-color="#04101f"/>
-    <stop offset="0.55" stop-color="#0a1022"/>
-    <stop offset="1" stop-color="#21101d"/>
-  </linearGradient>
-  <radialGradient id="r1" cx="75%" cy="45%" r="50%">
-    <stop offset="0" stop-color="#008cff" stop-opacity=".35"/>
-    <stop offset="1" stop-color="#008cff" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="r2" cx="92%" cy="30%" r="32%">
-    <stop offset="0" stop-color="#ff334f" stop-opacity=".22"/>
-    <stop offset="1" stop-color="#ff334f" stop-opacity="0"/>
-  </radialGradient>
+ <linearGradient id="bg" x1="0" x2="1"><stop stop-color="#02050a"/><stop offset=".52" stop-color="#07101d"/><stop offset="1" stop-color="#160913"/></linearGradient>
+ <radialGradient id="blue"><stop stop-color="#139cff" stop-opacity=".42"/><stop offset="1" stop-color="#139cff" stop-opacity="0"/></radialGradient>
+ <radialGradient id="red"><stop stop-color="#ff3651" stop-opacity=".24"/><stop offset="1" stop-color="#ff3651" stop-opacity="0"/></radialGradient>
 </defs>
-<rect width="1600" height="900" fill="url(#g)"/>
-<rect width="1600" height="900" fill="url(#r1)"/>
-<rect width="1600" height="900" fill="url(#r2)"/>
-<g opacity=".14" stroke="#7dc7ff">
-  <path d="M0 160 H1600 M0 320 H1600 M0 480 H1600 M0 640 H1600 M0 800 H1600"/>
-  <path d="M160 0 V900 M320 0 V900 M480 0 V900 M640 0 V900 M800 0 V900 M960 0 V900 M1120 0 V900 M1280 0 V900 M1440 0 V900"/>
+<rect width="1800" height="1000" fill="url(#bg)"/>
+<ellipse cx="1330" cy="470" rx="600" ry="530" fill="url(#blue)"/>
+<ellipse cx="1680" cy="260" rx="360" ry="340" fill="url(#red)"/>
+<g opacity=".11" stroke="#8ed4ff">
+ <path d="M0 140H1800M0 280H1800M0 420H1800M0 560H1800M0 700H1800M0 840H1800"/>
+ <path d="M140 0V1000M280 0V1000M420 0V1000M560 0V1000M700 0V1000M840 0V1000M980 0V1000M1120 0V1000M1260 0V1000M1400 0V1000M1540 0V1000M1680 0V1000"/>
 </g>
-<g fill="none" stroke="#1ea7ff" stroke-width="5" opacity=".45">
-  <path d="M1030 630 C1100 520 1230 455 1380 470 C1475 480 1520 535 1570 610"/>
-  <path d="M1080 610 L1185 610 L1235 570 L1400 570 L1485 620"/>
+<g fill="none" stroke-linecap="round">
+ <path d="M930 695C1030 535 1220 454 1435 474c130 12 236 81 310 185" stroke="#1ea7ff" stroke-width="7" opacity=".46"/>
+ <path d="M1000 676l127-2 70-61h315l112 78" stroke="#e9f7ff" stroke-width="4" opacity=".32"/>
+ <path d="M1140 635h385" stroke="#ff3651" stroke-width="4" opacity=".42"/>
 </g>
-<g fill="#1ea7ff" opacity=".6">
-  <circle cx="1210" cy="640" r="34"/>
-  <circle cx="1450" cy="640" r="34"/>
+<g fill="#07101a" stroke="#1ea7ff" stroke-width="7" opacity=".8">
+ <circle cx="1184" cy="714" r="60"/><circle cx="1530" cy="714" r="60"/>
 </g>
 </svg>
