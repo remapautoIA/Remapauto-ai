@@ -1,15 +1,21 @@
-# RemapAuto AI
+# RemapAuto AI — Phase 3
 
-Projet statique HTML/CSS/JavaScript prêt pour GitHub et Vercel.
+Version statique complète, prête pour GitHub et Vercel.
 
-## Installation
-1. Remplacer les anciens fichiers du dépôt GitHub par le contenu de ce dossier.
-2. Faire **Commit changes**.
-3. Vercel redéploiera automatiquement le site.
+## Nouveautés Phase 3
+- Photo officielle de Ricardo avec certificat Porsche
+- Projet réel Audi Stage 2 avec vidéo intégrée
+- Page Réalisations
+- Liens WhatsApp adaptatifs :
+  - WhatsApp Web sur ordinateur
+  - WhatsApp mobile sur téléphone
+- Messages WhatsApp préremplis
+- Hero Premium 2.0
+- SEO, favicon, sitemap et responsive
 
-## Contact
-- remapauto@gmail.com
-- +49 174 599 1491
-- +351 911 045 117
-- Lille, France
-- Mafra, Portugal
+## Mise en ligne
+1. Décompresser le ZIP.
+2. Supprimer ou sauvegarder les anciens fichiers du dépôt.
+3. Importer tout le contenu du dossier `Remapauto-ai-phase3`.
+4. Faire `Commit changes`.
+5. Attendre le redéploiement automatique Vercel.
