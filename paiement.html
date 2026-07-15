@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Paiement PayPal | RemapAuto AI</title>
+  <meta name="description" content="Paiement PayPal RemapAuto AI via le lien officiel PayPal.Me remappt.">
+  <meta name="theme-color" content="#05070b">
+
+  <style>
+    :root {
+      --bg:#05070b;
+      --panel:rgba(14,22,34,.9);
+      --text:#f5f8fd;
+      --muted:#aab6c7;
+      --blue:#1ea7ff;
+      --blue2:#0065dc;
+      --green:#20cf70;
+      --paypal:#0070e0;
+      --line:rgba(255,255,255,.1);
+      --radius:24px;
+      --max:1100px;
+    }
+
+    * {
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body {
+      min-height:100vh;
+      color:var(--text);
+      line-height:1.6;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%,rgba(0,112,255,.18),transparent 32%),
+        radial-gradient(circle at 90% 10%,rgba(255,54,81,.10),transparent 26%),
+        linear-gradient(180deg,#04060a,#08101a 58%,#05070b);
+    }
+
+    a {
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container {
+      width:min(var(--max),calc(100% - 34px));
+      margin:auto;
+    }
+
+    .topbar {
+      position:sticky;
+      top:0;
+      z-index:30;
+      border-bottom:1px solid var(--line);
+      background:rgba(5,7,11,.86);
+      backdrop-filter:blur(18px);
+    }
+
+    .nav {
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:22px;
+    }
+
+    .brand {
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+
+    .brand small {
+      display:block;
+      color:var(--muted);
+      font-size:.6rem;
+      letter-spacing:.14em;
+    }
+
+    .menu {
+      display:flex;
+      gap:22px;
+      color:#dce7f4;
+      font-weight:750;
+    }
+
+    .menu a:hover,
+    .menu .active {
+      color:var(--blue);
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 24px;
+      border:1px solid transparent;
+      border-radius:14px;
+      font-weight:850;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .btn:hover {
+      transform:translateY(-2px);
+    }
+
+    .btn-paypal {
+      color:#fff;
+      background:linear-gradient(135deg,#009cde,#003087);
+      box-shadow:0 16px 42px rgba(0,112,224,.3);
+    }
+
+    .btn-ghost {
+      border-color:rgba(255,255,255,.15);
+      background:rgba(255,255,255,.035);
+    }
+
+    .hero {
+      padding:76px 0 90px;
+    }
+
+    .eyebrow {
+      color:#ccecff;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+      font-size:.8rem;
+      font-weight:900;
+    }
+
+    h1 {
+      margin-top:14px;
+      font-size:clamp(2.7rem,7vw,5.5rem);
+      line-height:.98;
+      letter-spacing:-.05em;
+    }
+
+    .lead {
+      max-width:760px;
+      margin-top:18px;
+      color:var(--muted);
+      font-size:1.08rem;
+    }
+
+    .payment-grid {
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:28px;
+      align-items:center;
+      margin-top:42px;
+    }
+
+    .qr-card,
+    .payment-card {
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+      box-shadow:0 28px 80px rgba(0,0,0,.3);
+    }
+
+    .qr-card img {
+      width:100%;
+      border-radius:18px;
+      background:#fff;
+    }
+
+    .payment-card h2 {
+      font-size:clamp(1.8rem,4vw,3rem);
+      line-height:1.08;
+    }
+
+    .paypal-id {
+      display:inline-block;
+      margin-top:16px;
+      padding:9px 13px;
+      border:1px solid rgba(30,167,255,.3);
+      border-radius:999px;
+      background:rgba(30,167,255,.08);
+      color:#e6f6ff;
+      font-weight:850;
+    }
+
+    .steps {
+      display:grid;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .step {
+      display:flex;
+      gap:13px;
+      padding:15px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:rgba(255,255,255,.025);
+    }
+
+    .step strong {
+      color:var(--blue);
+    }
+
+    .amount-box {
+      margin-top:24px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      background:#09111c;
+    }
+
+    .amount-box label {
+      display:block;
+      margin-bottom:8px;
+      font-size:.85rem;
+      font-weight:800;
+    }
+
+    .amount-row {
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+    }
+
+    input {
+      width:100%;
+      padding:14px 15px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:13px;
+      background:#050a12;
+      color:#fff;
+      font:inherit;
+      outline:none;
+    }
+
+    input:focus {
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(30,167,255,.1);
+    }
+
+    .notice {
+      margin-top:20px;
+      padding:16px;
+      border-left:3px solid var(--blue);
+      background:rgba(30,167,255,.06);
+      color:var(--muted);
+    }
+
+    .actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    footer {
+      padding:36px 0;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+    }
+
+    @media(max-width:900px) {
+      .payment-grid {
+        grid-template-columns:1fr;
+      }
+
+      .menu {
+        display:none;
+      }
+    }
+
+    @media(max-width:600px) {
+      .amount-row {
+        grid-template-columns:1fr;
+      }
+
+      .actions .btn {
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        REMAPAUTO AI
+        <small>GERMAN PRECISION</small>
+      </a>
+
+      <nav class="menu">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="configurateur.html">Configurateur</a>
+        <a href="devis.html">Devis</a>
+        <a class="active" href="paiement.html">Paiement</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="btn btn-ghost" href="devis.html">Retour au devis</a>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="container">
+      <span class="eyebrow">Secure Payment</span>
+      <h1>Paiement direct avec PayPal.</h1>
+      <p class="lead">
+        Utilisez le bouton PayPal ou scannez le QR code. Vous serez redirigé vers
+        la page PayPal officielle de RemapAuto AI.
+      </p>
+
+      <div class="payment-grid">
+        <figure class="qr-card">
+          <img src="paypal-remappt-qr.jpg" alt="QR code PayPal RemapAuto AI">
+        </figure>
+
+        <section class="payment-card">
+          <h2>PayPal RemapAuto AI</h2>
+          <span class="paypal-id">@remappt</span>
+
+          <div class="steps">
+            <div class="step">
+              <strong>01</strong>
+              <span>Cliquez sur le bouton PayPal ou scannez le QR code.</span>
+            </div>
+            <div class="step">
+              <strong>02</strong>
+              <span>Vérifiez le bénéficiaire avant de confirmer le paiement.</span>
+            </div>
+            <div class="step">
+              <strong>03</strong>
+              <span>Indiquez votre nom, votre véhicule ou la référence du devis.</span>
+            </div>
+          </div>
+
+          <div class="amount-box">
+            <label for="amount">Montant à payer en euros — facultatif</label>
+            <div class="amount-row">
+              <input id="amount" type="number" min="1" step="0.01" placeholder="Exemple : 250">
+              <button class="btn btn-paypal" id="amountButton" type="button">
+                Continuer vers PayPal
+              </button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a
+              class="btn btn-paypal"
+              href="https://paypal.me/remappt"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Payer avec PayPal
+            </a>
+
+            <button class="btn btn-ghost" id="copyButton" type="button">
+              Copier le lien PayPal
+            </button>
+          </div>
+
+          <div class="notice">
+            PayPal ouvre une page externe sécurisée. RemapAuto AI ne collecte et ne
+            conserve aucune donnée bancaire sur ce site. Vérifiez toujours le nom du
+            bénéficiaire avant de confirmer.
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> RemapAuto AI — Paiement via PayPal.
+    </div>
+  </footer>
+
+  <script>
+    const paypalBase = "https://paypal.me/remappt";
+    const amountInput = document.getElementById("amount");
+    const amountButton = document.getElementById("amountButton");
+    const copyButton = document.getElementById("copyButton");
+
+    amountButton.addEventListener("click", () => {
+      const raw = amountInput.value.trim();
+      const amount = Number(raw);
+
+      if (!raw || !Number.isFinite(amount) || amount <= 0) {
+        window.open(paypalBase, "_blank", "noopener");
+        return;
+      }
+
+      // PayPal.Me accepte généralement un montant placé après le nom du profil.
+      const formatted = amount.toFixed(2).replace(",", ".");
+      window.open(`${paypalBase}/${formatted}EUR`, "_blank", "noopener");
+    });
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(paypalBase);
+        copyButton.textContent = "Lien copié ✓";
+        setTimeout(() => copyButton.textContent = "Copier le lien PayPal", 1800);
+      } catch (error) {
+        window.prompt("Copiez ce lien PayPal :", paypalBase);
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
