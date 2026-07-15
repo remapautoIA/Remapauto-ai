@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ganhos de Potência | RemapAuto AI</title>
+  <meta name="description" content="Compare a potência e o binário de origem com os ganhos estimados Stage 1 e Stage 2 na RemapAuto AI.">
+  <meta name="theme-color" content="#05070b">
+  <style>
+    :root{
+      --bg:#05070b;--panel:#0d1521;--panel2:#111b2a;--text:#f5f8fd;--muted:#aab6c7;
+      --blue:#1ea7ff;--blue2:#0065dc;--red:#ff3651;--green:#20cf70;--line:rgba(255,255,255,.1);
+      --radius:20px;--max:1200px
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;color:var(--text);line-height:1.6;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%,rgba(0,112,255,.18),transparent 32%),
+        radial-gradient(circle at 90% 10%,rgba(255,54,81,.11),transparent 25%),
+        linear-gradient(180deg,#04060a,#08101a 58%,#05070b)
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 34px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(5,7,11,.85);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{font-weight:900;letter-spacing:.06em}.brand small{display:block;color:var(--muted);font-size:.6rem;letter-spacing:.14em}
+    .menu{display:flex;gap:22px;font-weight:750;color:#dce7f4}
+    .menu a:hover,.menu .active{color:var(--blue)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:13px;font-weight:850;border:1px solid transparent;cursor:pointer}
+    .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 14px 38px rgba(0,104,221,.28)}
+    .btn-ghost{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.035)}
+    .hero{padding:78px 0 50px}
+    .eyebrow{color:#ccecff;text-transform:uppercase;letter-spacing:.15em;font-size:.8rem;font-weight:900}
+    h1{margin-top:14px;font-size:clamp(2.8rem,7vw,5.8rem);line-height:.98;letter-spacing:-.05em}
+    .lead{max-width:780px;margin-top:18px;color:var(--muted);font-size:1.08rem}
+    .selector-panel{
+      margin-top:34px;padding:26px;border:1px solid var(--line);border-radius:24px;
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))
+    }
+    .filters{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .field{display:grid;gap:7px}.field label{font-size:.82rem;font-weight:800;color:#dce9f8}
+    select{width:100%;padding:14px 15px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:#09111c;color:#fff;font:inherit;outline:none}
+    option{color:#000}
+    .brands-title{margin:62px 0 22px;font-size:1.65rem}
+    .brands-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    .brand-card{
+      min-height:112px;display:grid;place-items:center;padding:18px;border:1px solid var(--line);
+      border-radius:18px;background:rgba(255,255,255,.035);font-weight:850;transition:.25s ease;cursor:pointer
+    }
+    .brand-card:hover,.brand-card.selected{transform:translateY(-4px);border-color:rgba(30,167,255,.5);box-shadow:0 20px 50px rgba(0,96,255,.14)}
+    .result-section{padding:70px 0}
+    .vehicle-title{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05}
+    .result-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:22px;margin-top:28px}
+    .panel{padding:28px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.035)}
+    .bar-chart{display:grid;gap:20px;margin:25px 0}
+    .bar-row{display:grid;grid-template-columns:90px 1fr 70px;gap:12px;align-items:center}
+    .bar-track{height:20px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+    .bar{height:100%;border-radius:inherit;transition:width .55s ease}
+    .bar.original{background:linear-gradient(90deg,#6a4a89,#9a6dc0)}
+    .bar.stage1{background:linear-gradient(90deg,#0a9b40,#28d96e)}
+    .bar.stage2{background:linear-gradient(90deg,#0065dc,#1ea7ff)}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+    .metric{padding:16px;border:1px solid var(--line);border-radius:15px;background:#0a111c}
+    .metric small{display:block;color:var(--muted);margin-bottom:5px}.metric strong{font-size:1.25rem}
+    .gain{color:var(--green)}
+    .details{display:grid;grid-template-columns:170px 1fr;gap:12px 18px;margin-top:22px}
+    .details dt{color:var(--muted)}.details dd{font-weight:750}
+    .notice{margin-top:22px;padding:16px;border-left:3px solid var(--blue);background:rgba(30,167,255,.06);color:var(--muted)}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    footer{margin-top:60px;padding:38px 0;border-top:1px solid var(--line);color:var(--muted)}
+    @media(max-width:980px){.filters{grid-template-columns:repeat(2,1fr)}.brands-grid{grid-template-columns:repeat(3,1fr)}.result-grid{grid-template-columns:1fr}.menu{display:none}}
+    @media(max-width:650px){.filters,.metric-grid{grid-template-columns:1fr}.brands-grid{grid-template-columns:repeat(2,1fr)}.details{grid-template-columns:1fr}.bar-row{grid-template-columns:72px 1fr 58px}}
+  </style>
+
+<style>
+.phase41-language-switcher{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.phase41-language-switcher a{padding:7px 10px;border:1px solid rgba(255,255,255,.14);border-radius:999px;
+font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;text-decoration:none}
+.phase41-language-switcher a:hover,.phase41-language-switcher .active{border-color:#1ea7ff;background:rgba(30,167,255,.12);color:#fff}
+@media(max-width:650px){.phase41-language-switcher{justify-content:center;width:100%}}
+</style>
+
+
+<link rel="alternate" hreflang="fr" href="https://remapauto-ai.vercel.app/performance.html">
+<link rel="alternate" hreflang="pt" href="https://remapauto-ai.vercel.app/en/performance.html">
+<link rel="alternate" hreflang="x-default" href="https://remapauto-ai.vercel.app/performance.html">
+
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="pt.html">REMAPAUTO AI<small>GERMAN PRECISION</small></a>
+      <nav class="menu">
+        <a href="pt.html">Início</a>
+        <a href="../services.html">Serviços</a>
+        <a href="../about.html">Sobre</a>
+        <a class="active" href="performance-pt.html">Ganhos de Potência</a>
+        <a href="../devis.html">Orçamento</a>
+        <a href="../contact.html">Contacto</a>
+      </nav>
+
+<div class="phase41-language-switcher" aria-label="Seletor de idioma">
+  <a href="performance.html">🇫🇷 FR</a>
+  <a href="en/performance.html">🇬🇧 EN</a>
+  <a class="active" href="performance-pt.html">🇵🇹 PT</a>
+</div>
+
+      <a class="btn btn-primary" href="../devis.html">Pedir Orçamento</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Performance Database</span>
+        <h1>Configurador de Performance Automóvel.</h1>
+        <p class="lead">
+          Choisissez votre véhicule pour consulter les valeurs d'origine et les gains
+          estimés après optimisation Stage 1 ou Stage 2.
+        </p>
+
+        <div class="selector-panel">
+          <div class="filters">
+            <div class="field">
+              <label for="brandSelect">Marca</label>
+              <select id="brandSelect"></select>
+            </div>
+            <div class="field">
+              <label for="modelSelect">Modelo</label>
+              <select id="modelSelect"></select>
+            </div>
+            <div class="field">
+              <label for="yearSelect">Geração / Ano</label>
+              <select id="yearSelect"></select>
+            </div>
+            <div class="field">
+              <label for="engineSelect">Motorização</label>
+              <select id="engineSelect"></select>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="brands-title">Marcas Disponíveis</h2>
+        <div class="brands-grid" id="brandsGrid"></div>
+      </div>
+    </section>
+
+    <section class="result-section">
+      <div class="container">
+        <h2 class="vehicle-title" id="vehicleTitle"></h2>
+
+        <div class="result-grid">
+          <article class="panel">
+            <h3>Potência & Binário</h3>
+            <div class="bar-chart">
+              <div class="bar-row">
+                <span>Origem</span>
+                <div class="bar-track"><div class="bar original" id="barOrigem"></div></div>
+                <strong id="barOrigemValue"></strong>
+              </div>
+              <div class="bar-row">
+                <span>Stage 1</span>
+                <div class="bar-track"><div class="bar stage1" id="barStage1"></div></div>
+                <strong id="barStage1Value"></strong>
+              </div>
+              <div class="bar-row">
+                <span>Stage 2</span>
+                <div class="bar-track"><div class="bar stage2" id="barStage2"></div></div>
+                <strong id="barStage2Value"></strong>
+              </div>
+            </div>
+
+            <div class="metric-grid">
+              <div class="metric"><small>Origem</small><strong id="originalPower"></strong><br><span id="originalTorque"></span></div>
+              <div class="metric"><small>Stage 1</small><strong id="stage1Power"></strong><br><span id="stage1Torque"></span><br><b class="gain" id="stage1Gain"></b></div>
+              <div class="metric"><small>Stage 2</small><strong id="stage2Power"></strong><br><span id="stage2Torque"></span><br><b class="gain" id="stage2Gain"></b></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Detalhes Técnicos</h3>
+            <dl class="details">
+              <dt>Tipo de Motor</dt><dd id="engineType"></dd>
+              <dt>Cilindrada</dt><dd id="engineSize"></dd>
+              <dt>Centralina ECU</dt><dd id="ecuType"></dd>
+              <dt>Potência de Origem</dt><dd id="detailsOrigemPower"></dd>
+              <dt>Binário de Origem</dt><dd id="detailsOrigemTorque"></dd>
+            </dl>
+
+            <div class="notice">
+              Les valeurs affichées sont indicatives. Le résultat réel dépend du véhicule,
+              du carburant, de l'état mécanique, des équipements et de la configuration
+              du calculateur. Un diagnostic préalable est recommandé.
+            </div>
+
+            <div class="actions">
+              <a class="btn btn-primary" href="../devis.html">Pedir um Orçamento Personalizado</a>
+              <a class="btn btn-ghost" id="whatsappPerformance" href="#" target="_blank" rel="noopener">Contactoar por WhatsApp</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> RemapAuto AI — Driving Performance Beyond Limits.</div>
+  </footer>
+
+  <script>
+    // Base de dados de demonstração Phase 3.1.
+    // Os valores podem ser ampliados progressivamente com dados validados pela RemapAuto AI.
+    const vehicles = [
+      {
+        brand: "Audi", model: "A3 8V", year: "2012–2020", engine: "2.0 TDI 150 hp",
+        engineType: "Diesel", engineSize: "1968 cm³", ecu: "Bosch EDC17C64",
+        originalPower: 150, originalTorque: 320,
+        stage1Power: 190, stage1Torque: 400,
+        stage2Power: 205, stage2Torque: 430
+      },
+      {
+        brand: "Audi", model: "S3 8V", year: "2013–2020", engine: "2.0 TFSI 300 hp",
+        engineType: "Essence", engineSize: "1984 cm³", ecu: "Bosch MED17 / SIMOS",
+        originalPower: 300, originalTorque: 380,
+        stage1Power: 365, stage1Torque: 480,
+        stage2Power: 400, stage2Torque: 520
+      },
+      {
+        brand: "BMW", model: "1 Series E87", year: "2007–2011", engine: "118d 143 hp",
+        engineType: "Diesel", engineSize: "1995 cm³", ecu: "Bosch EDC17C06 / EDC17C41",
+        originalPower: 143, originalTorque: 300,
+        stage1Power: 180, stage1Torque: 380,
+        stage2Power: 195, stage2Torque: 410
+      },
+      {
+        brand: "BMW", model: "3 Series F30", year: "2012–2019", engine: "320d 184 hp",
+        engineType: "Diesel", engineSize: "1995 cm³", ecu: "Bosch EDC17C50",
+        originalPower: 184, originalTorque: 380,
+        stage1Power: 220, stage1Torque: 450,
+        stage2Power: 235, stage2Torque: 480
+      },
+      {
+        brand: "Mercedes-Benz", model: "A-Class W176", year: "2012–2018", engine: "A200 CDI 136 hp",
+        engineType: "Diesel", engineSize: "2143 cm³", ecu: "Bosch EDC17",
+        originalPower: 136, originalTorque: 300,
+        stage1Power: 175, stage1Torque: 380,
+        stage2Power: 190, stage2Torque: 410
+      },
+      {
+        brand: "Porsche", model: "Macan", year: "2014–2018", engine: "3.0 V6 Diesel 258 hp",
+        engineType: "Diesel", engineSize: "2967 cm³", ecu: "Bosch EDC17CP44",
+        originalPower: 258, originalTorque: 580,
+        stage1Power: 310, stage1Torque: 650,
+        stage2Power: 330, stage2Torque: 700
+      },
+      {
+        brand: "Volkswagen", model: "Golf 7", year: "2012–2019", engine: "2.0 TDI 150 hp",
+        engineType: "Diesel", engineSize: "1968 cm³", ecu: "Bosch EDC17C64",
+        originalPower: 150, originalTorque: 320,
+        stage1Power: 190, stage1Torque: 400,
+        stage2Power: 205, stage2Torque: 430
+      },
+      {
+        brand: "Jaguar", model: "XE", year: "2015–2020", engine: "2.0d 180 hp",
+        engineType: "Diesel", engineSize: "1999 cm³", ecu: "Bosch / Continental",
+        originalPower: 180, originalTorque: 430,
+        stage1Power: 215, stage1Torque: 500,
+        stage2Power: 230, stage2Torque: 530
+      }
+    ];
+
+    const brandSelect = document.getElementById("brandSelect");
+    const modelSelect = document.getElementById("modelSelect");
+    const yearSelect = document.getElementById("yearSelect");
+    const engineSelect = document.getElementById("engineSelect");
+    const brandsGrid = document.getElementById("brandsGrid");
+
+    const unique = (items) => [...new Set(items)];
+
+    function setOptions(select, values) {
+      select.innerHTML = values.map(value => `<option value="${value}">${value}</option>`).join("");
+    }
+
+    function currentFiltered() {
+      return vehicles.filter(v =>
+        (!brandSelect.value || v.brand === brandSelect.value) &&
+        (!modelSelect.value || v.model === modelSelect.value) &&
+        (!yearSelect.value || v.year === yearSelect.value) &&
+        (!engineSelect.value || v.engine === engineSelect.value)
+      );
+    }
+
+    function populateMarcas() {
+      const brands = unique(vehicles.map(v => v.brand));
+      setOptions(brandSelect, brands);
+      brandsGrid.innerHTML = brands.map(brand => `<button class="brand-card" data-brand="${brand}">${brand}</button>`).join("");
+      brandsGrid.querySelectorAll(".brand-card").forEach(button => {
+        button.addEventListener("click", () => {
+          brandSelect.value = button.dataset.brand;
+          updateModelos();
+          document.querySelector(".result-section").scrollIntoView({behavior:"smooth"});
+        });
+      });
+    }
+
+    function updateModelos() {
+      const byMarca = vehicles.filter(v => v.brand === brandSelect.value);
+      setOptions(modelSelect, unique(byMarca.map(v => v.model)));
+      updateYears();
+      highlightMarca();
+    }
+
+    function updateYears() {
+      const byModelo = vehicles.filter(v => v.brand === brandSelect.value && v.model === modelSelect.value);
+      setOptions(yearSelect, unique(byModelo.map(v => v.year)));
+      updateMotorizaçãos();
+    }
+
+    function updateMotorizaçãos() {
+      const byYear = vehicles.filter(v =>
+        v.brand === brandSelect.value &&
+        v.model === modelSelect.value &&
+        v.year === yearSelect.value
+      );
+      setOptions(engineSelect, unique(byYear.map(v => v.engine)));
+      renderVehicle();
+    }
+
+    function highlightMarca() {
+      brandsGrid.querySelectorAll(".brand-card").forEach(card => {
+        card.classList.toggle("selected", card.dataset.brand === brandSelect.value);
+      });
+    }
+
+    function renderVehicle() {
+      const vehicle = currentFiltered()[0];
+      if (!vehicle) return;
+
+      document.getElementById("vehicleTitle").textContent =
+        `${vehicle.brand} ${vehicle.model} • ${vehicle.year} • ${vehicle.engine}`;
+
+      const maxPower = Math.max(vehicle.originalPower, vehicle.stage1Power, vehicle.stage2Power) * 1.1;
+      const setBar = (id, value) => document.getElementById(id).style.width = `${value / maxPower * 100}%`;
+      setBar("barOrigem", vehicle.originalPower);
+      setBar("barStage1", vehicle.stage1Power);
+      setBar("barStage2", vehicle.stage2Power);
+
+      document.getElementById("barOrigemValue").textContent = `${vehicle.originalPower} hp`;
+      document.getElementById("barStage1Value").textContent = `${vehicle.stage1Power} hp`;
+      document.getElementById("barStage2Value").textContent = `${vehicle.stage2Power} hp`;
+
+      document.getElementById("originalPower").textContent = `${vehicle.originalPower} hp`;
+      document.getElementById("originalTorque").textContent = `${vehicle.originalTorque} Nm`;
+      document.getElementById("stage1Power").textContent = `${vehicle.stage1Power} hp`;
+      document.getElementById("stage1Torque").textContent = `${vehicle.stage1Torque} Nm`;
+      document.getElementById("stage2Power").textContent = `${vehicle.stage2Power} hp`;
+      document.getElementById("stage2Torque").textContent = `${vehicle.stage2Torque} Nm`;
+      document.getElementById("stage1Gain").textContent =
+        `+${vehicle.stage1Power - vehicle.originalPower} hp / +${vehicle.stage1Torque - vehicle.originalTorque} Nm`;
+      document.getElementById("stage2Gain").textContent =
+        `+${vehicle.stage2Power - vehicle.originalPower} hp / +${vehicle.stage2Torque - vehicle.originalTorque} Nm`;
+
+      document.getElementById("engineType").textContent = vehicle.engineType;
+      document.getElementById("engineSize").textContent = vehicle.engineSize;
+      document.getElementById("ecuType").textContent = vehicle.ecu;
+      document.getElementById("detailsOrigemPower").textContent = `${vehicle.originalPower} hp`;
+      document.getElementById("detailsOrigemTorque").textContent = `${vehicle.originalTorque} Nm`;
+
+      const msg = encodeURIComponent(
+        `Olá RemapAuto AI, gostaria de receber informações sobre ${vehicle.brand} ${vehicle.model} ${vehicle.engine}.`
+      );
+      document.getElementById("whatsappPerformance").href =
+        /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+        ? `https://wa.me/491745991491?text=${msg}`
+        : `https://web.whatsapp.com/send?phone=491745991491&text=${msg}`;
+    }
+
+    brandSelect.addEventListener("change", updateModelos);
+    modelSelect.addEventListener("change", updateYears);
+    yearSelect.addEventListener("change", updateMotorizaçãos);
+    engineSelect.addEventListener("change", renderVehicle);
+
+    populateMarcas();
+    updateModelos();
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
