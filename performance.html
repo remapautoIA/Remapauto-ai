@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ganhos de Potência | RemapAuto AI</title>
-  <meta name="description" content="Compare a potência e o binário de origem com os ganhos estimados Stage 1 e Stage 2 na RemapAuto AI.">
+  <title>Power Gains | RemapAuto AI</title>
+  <meta name="description" content="Compare original power and torque with estimated Stage 1 and Stage 2 gains at RemapAuto AI.">
   <meta name="theme-color" content="#05070b">
   <style>
     :root{
@@ -85,7 +85,7 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
 
 
 <link rel="alternate" hreflang="fr" href="https://remapauto-ai.vercel.app/performance.html">
-<link rel="alternate" hreflang="pt" href="https://remapauto-ai.vercel.app/en/performance.html">
+<link rel="alternate" hreflang="en" href="https://remapauto-ai.vercel.app/en/performance.html">
 <link rel="alternate" hreflang="x-default" href="https://remapauto-ai.vercel.app/performance.html">
 
 </head>
@@ -94,21 +94,20 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
     <div class="container nav">
       <a class="brand" href="index.html">REMAPAUTO AI<small>GERMAN PRECISION</small></a>
       <nav class="menu">
-        <a href="index.html">Início</a>
-        <a href="../services.html">Serviços</a>
-        <a href="../about.html">Sobre</a>
-        <a class="active" href="performance.html">Ganhos de Potência</a>
-        <a href="../devis.html">Orçamento</a>
-        <a href="../contact.html">Contacto</a>
+        <a href="index.html">Home</a>
+        <a href="../services.html">Services</a>
+        <a href="../about.html">About</a>
+        <a class="active" href="performance.html">Power Gains</a>
+        <a href="../devis.html">Quote</a>
+        <a href="../contact.html">Contact</a>
       </nav>
 
-<div class="phase41-language-switcher" aria-label="Seletor de idioma">
+<div class="phase41-language-switcher" aria-label="Language selector">
   <a href="../performance.html">🇫🇷 FR</a>
-  <a href="../en/performance.html">🇬🇧 EN</a>
-  <a class="active" href="performance.html">🇵🇹 PT</a>
+  <a class="active" href="performance.html">🇬🇧 EN</a>
 </div>
 
-      <a class="btn btn-primary" href="../devis.html">Pedir Orçamento</a>
+      <a class="btn btn-primary" href="../devis.html">Request a Quote</a>
     </div>
   </header>
 
@@ -116,7 +115,7 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
     <section class="hero">
       <div class="container">
         <span class="eyebrow">Performance Database</span>
-        <h1>Configurador de Performance Automóvel.</h1>
+        <h1>Vehicle Performance Configurator.</h1>
         <p class="lead">
           Choisissez votre véhicule pour consulter les valeurs d'origine et les gains
           estimés après optimisation Stage 1 ou Stage 2.
@@ -125,25 +124,25 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
         <div class="selector-panel">
           <div class="filters">
             <div class="field">
-              <label for="brandSelect">Marca</label>
+              <label for="brandSelect">Brand</label>
               <select id="brandSelect"></select>
             </div>
             <div class="field">
-              <label for="modelSelect">Modelo</label>
+              <label for="modelSelect">Model</label>
               <select id="modelSelect"></select>
             </div>
             <div class="field">
-              <label for="yearSelect">Geração / Ano</label>
+              <label for="yearSelect">Generation / Year</label>
               <select id="yearSelect"></select>
             </div>
             <div class="field">
-              <label for="engineSelect">Motorização</label>
+              <label for="engineSelect">Engine</label>
               <select id="engineSelect"></select>
             </div>
           </div>
         </div>
 
-        <h2 class="brands-title">Marcas Disponíveis</h2>
+        <h2 class="brands-title">Available Brands</h2>
         <div class="brands-grid" id="brandsGrid"></div>
       </div>
     </section>
@@ -154,12 +153,12 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
 
         <div class="result-grid">
           <article class="panel">
-            <h3>Potência & Binário</h3>
+            <h3>Power & Torque</h3>
             <div class="bar-chart">
               <div class="bar-row">
-                <span>Origem</span>
-                <div class="bar-track"><div class="bar original" id="barOrigem"></div></div>
-                <strong id="barOrigemValue"></strong>
+                <span>Original</span>
+                <div class="bar-track"><div class="bar original" id="barOriginal"></div></div>
+                <strong id="barOriginalValue"></strong>
               </div>
               <div class="bar-row">
                 <span>Stage 1</span>
@@ -174,20 +173,20 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
             </div>
 
             <div class="metric-grid">
-              <div class="metric"><small>Origem</small><strong id="originalPower"></strong><br><span id="originalTorque"></span></div>
+              <div class="metric"><small>Original</small><strong id="originalPower"></strong><br><span id="originalTorque"></span></div>
               <div class="metric"><small>Stage 1</small><strong id="stage1Power"></strong><br><span id="stage1Torque"></span><br><b class="gain" id="stage1Gain"></b></div>
               <div class="metric"><small>Stage 2</small><strong id="stage2Power"></strong><br><span id="stage2Torque"></span><br><b class="gain" id="stage2Gain"></b></div>
             </div>
           </article>
 
           <article class="panel">
-            <h3>Detalhes Técnicos</h3>
+            <h3>Technical Details</h3>
             <dl class="details">
-              <dt>Tipo de Motor</dt><dd id="engineType"></dd>
-              <dt>Cilindrada</dt><dd id="engineSize"></dd>
-              <dt>Centralina ECU</dt><dd id="ecuType"></dd>
-              <dt>Potência de Origem</dt><dd id="detailsOrigemPower"></dd>
-              <dt>Binário de Origem</dt><dd id="detailsOrigemTorque"></dd>
+              <dt>Engine Type</dt><dd id="engineType"></dd>
+              <dt>Displacement</dt><dd id="engineSize"></dd>
+              <dt>ECU</dt><dd id="ecuType"></dd>
+              <dt>Original Power</dt><dd id="detailsOriginalPower"></dd>
+              <dt>Original Torque</dt><dd id="detailsOriginalTorque"></dd>
             </dl>
 
             <div class="notice">
@@ -197,8 +196,8 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
             </div>
 
             <div class="actions">
-              <a class="btn btn-primary" href="../devis.html">Pedir um Orçamento Personalizado</a>
-              <a class="btn btn-ghost" id="whatsappPerformance" href="#" target="_blank" rel="noopener">Contactoar por WhatsApp</a>
+              <a class="btn btn-primary" href="../devis.html">Request a Personalized Quote</a>
+              <a class="btn btn-ghost" id="whatsappPerformance" href="#" target="_blank" rel="noopener">Contact on WhatsApp</a>
             </div>
           </article>
         </div>
@@ -211,8 +210,8 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
   </footer>
 
   <script>
-    // Base de dados de demonstração Phase 3.1.
-    // Os valores podem ser ampliados progressivamente com dados validados pela RemapAuto AI.
+    // Phase 3.1 demonstration database.
+    // The values can be expanded progressively with data validated by RemapAuto AI.
     const vehicles = [
       {
         brand: "Audi", model: "A3 8V", year: "2012–2020", engine: "2.0 TDI 150 hp",
@@ -293,33 +292,33 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
       );
     }
 
-    function populateMarcas() {
+    function populateBrands() {
       const brands = unique(vehicles.map(v => v.brand));
       setOptions(brandSelect, brands);
       brandsGrid.innerHTML = brands.map(brand => `<button class="brand-card" data-brand="${brand}">${brand}</button>`).join("");
       brandsGrid.querySelectorAll(".brand-card").forEach(button => {
         button.addEventListener("click", () => {
           brandSelect.value = button.dataset.brand;
-          updateModelos();
+          updateModels();
           document.querySelector(".result-section").scrollIntoView({behavior:"smooth"});
         });
       });
     }
 
-    function updateModelos() {
-      const byMarca = vehicles.filter(v => v.brand === brandSelect.value);
-      setOptions(modelSelect, unique(byMarca.map(v => v.model)));
+    function updateModels() {
+      const byBrand = vehicles.filter(v => v.brand === brandSelect.value);
+      setOptions(modelSelect, unique(byBrand.map(v => v.model)));
       updateYears();
-      highlightMarca();
+      highlightBrand();
     }
 
     function updateYears() {
-      const byModelo = vehicles.filter(v => v.brand === brandSelect.value && v.model === modelSelect.value);
-      setOptions(yearSelect, unique(byModelo.map(v => v.year)));
-      updateMotorizaçãos();
+      const byModel = vehicles.filter(v => v.brand === brandSelect.value && v.model === modelSelect.value);
+      setOptions(yearSelect, unique(byModel.map(v => v.year)));
+      updateEngines();
     }
 
-    function updateMotorizaçãos() {
+    function updateEngines() {
       const byYear = vehicles.filter(v =>
         v.brand === brandSelect.value &&
         v.model === modelSelect.value &&
@@ -329,7 +328,7 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
       renderVehicle();
     }
 
-    function highlightMarca() {
+    function highlightBrand() {
       brandsGrid.querySelectorAll(".brand-card").forEach(card => {
         card.classList.toggle("selected", card.dataset.brand === brandSelect.value);
       });
@@ -344,11 +343,11 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
 
       const maxPower = Math.max(vehicle.originalPower, vehicle.stage1Power, vehicle.stage2Power) * 1.1;
       const setBar = (id, value) => document.getElementById(id).style.width = `${value / maxPower * 100}%`;
-      setBar("barOrigem", vehicle.originalPower);
+      setBar("barOriginal", vehicle.originalPower);
       setBar("barStage1", vehicle.stage1Power);
       setBar("barStage2", vehicle.stage2Power);
 
-      document.getElementById("barOrigemValue").textContent = `${vehicle.originalPower} hp`;
+      document.getElementById("barOriginalValue").textContent = `${vehicle.originalPower} hp`;
       document.getElementById("barStage1Value").textContent = `${vehicle.stage1Power} hp`;
       document.getElementById("barStage2Value").textContent = `${vehicle.stage2Power} hp`;
 
@@ -366,11 +365,11 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
       document.getElementById("engineType").textContent = vehicle.engineType;
       document.getElementById("engineSize").textContent = vehicle.engineSize;
       document.getElementById("ecuType").textContent = vehicle.ecu;
-      document.getElementById("detailsOrigemPower").textContent = `${vehicle.originalPower} hp`;
-      document.getElementById("detailsOrigemTorque").textContent = `${vehicle.originalTorque} Nm`;
+      document.getElementById("detailsOriginalPower").textContent = `${vehicle.originalPower} hp`;
+      document.getElementById("detailsOriginalTorque").textContent = `${vehicle.originalTorque} Nm`;
 
       const msg = encodeURIComponent(
-        `Olá RemapAuto AI, gostaria de receber informações sobre ${vehicle.brand} ${vehicle.model} ${vehicle.engine}.`
+        `Hello RemapAuto AI, I would like information about ${vehicle.brand} ${vehicle.model} ${vehicle.engine}.`
       );
       document.getElementById("whatsappPerformance").href =
         /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
@@ -378,13 +377,13 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
         : `https://web.whatsapp.com/send?phone=491745991491&text=${msg}`;
     }
 
-    brandSelect.addEventListener("change", updateModelos);
+    brandSelect.addEventListener("change", updateModels);
     modelSelect.addEventListener("change", updateYears);
-    yearSelect.addEventListener("change", updateMotorizaçãos);
+    yearSelect.addEventListener("change", updateEngines);
     engineSelect.addEventListener("change", renderVehicle);
 
-    populateMarcas();
-    updateModelos();
+    populateBrands();
+    updateModels();
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
