@@ -1,0 +1,1 @@
+Phase 4 multilingue: français à la racine, anglais dans /en, portugais dans /pt. Importer tout le contenu à la racine GitHub.
