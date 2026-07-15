@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Avis clients | RemapAuto AI</title>
+  <meta name="description" content="Consultez les avis clients RemapAuto AI et partagez votre expérience après une prestation de diagnostic, codage ou calibration.">
+  <meta name="theme-color" content="#05070b">
+
+  <style>
+    :root{
+      --bg:#05070b;--panel:#0d1521;--text:#f5f8fd;--muted:#aab6c7;
+      --blue:#1ea7ff;--blue2:#0065dc;--green:#20cf70;--gold:#ffc857;
+      --line:rgba(255,255,255,.1);--radius:20px;--max:1180px
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;color:var(--text);line-height:1.6;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%,rgba(0,112,255,.18),transparent 32%),
+        radial-gradient(circle at 90% 10%,rgba(255,54,81,.10),transparent 25%),
+        linear-gradient(180deg,#04060a,#08101a 58%,#05070b)
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 34px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:30;border-bottom:1px solid var(--line);background:rgba(5,7,11,.86);backdrop-filter:blur(18px)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-weight:900;letter-spacing:.06em}.brand small{display:block;color:var(--muted);font-size:.6rem;letter-spacing:.14em}
+    .menu{display:flex;gap:20px;color:#dce7f4;font-weight:750}.menu a:hover,.menu .active{color:var(--blue)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid transparent;border-radius:13px;font-weight:850;cursor:pointer;transition:.25s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 14px 38px rgba(0,104,221,.28)}
+    .btn-ghost{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.035)}
+    .btn-whatsapp{background:linear-gradient(135deg,#20d874,#0b9f4c)}
+    .hero{padding:78px 0 48px;text-align:center}
+    .eyebrow{color:#ccecff;text-transform:uppercase;letter-spacing:.15em;font-size:.8rem;font-weight:900}
+    h1{margin-top:14px;font-size:clamp(2.7rem,7vw,5.5rem);line-height:.98;letter-spacing:-.05em}
+    .lead{max-width:760px;margin:18px auto 0;color:var(--muted);font-size:1.08rem}
+    .rating-summary{display:inline-flex;align-items:center;gap:14px;margin-top:28px;padding:15px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035)}
+    .stars{color:var(--gold);letter-spacing:.12em;font-size:1.15rem}
+    .section{padding:64px 0}
+    .section-title{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05}
+    .section-subtitle{margin-top:14px;color:var(--muted);max-width:760px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+    .stat{padding:22px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035);text-align:center}
+    .stat strong{display:block;font-size:2rem}.stat span{color:var(--muted)}
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .review-card{padding:24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}
+    .review-card .stars{font-size:1rem}
+    .review-card blockquote{margin-top:16px;color:#e6eef7}
+    .review-meta{margin-top:18px;color:var(--muted);font-size:.92rem}
+    .review-meta strong{display:block;color:#fff}
+    .empty-note{padding:24px;border:1px dashed rgba(255,255,255,.18);border-radius:18px;color:var(--muted);text-align:center}
+    .form-panel{display:grid;grid-template-columns:.85fr 1.15fr;gap:26px;margin-top:30px;padding:30px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.035)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{display:grid;gap:7px}.field.full{grid-column:1/-1}
+    label{font-size:.83rem;font-weight:800}
+    input,select,textarea{width:100%;padding:14px 15px;border:1px solid rgba(255,255,255,.11);border-radius:13px;background:#09111c;color:#fff;font:inherit;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,167,255,.1)}
+    textarea{min-height:140px;resize:vertical}option{color:#000}
+    .notice{margin-top:16px;padding:15px;border-left:3px solid var(--blue);background:rgba(30,167,255,.06);color:var(--muted)}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted)}
+    @media(max-width:980px){.reviews-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.form-panel{grid-template-columns:1fr}.menu{display:none}}
+    @media(max-width:650px){.reviews-grid,.stats,.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.actions .btn{width:100%}}
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        REMAPAUTO AI
+        <small>GERMAN PRECISION</small>
+      </a>
+
+      <nav class="menu">
+        <a href="index.html">Accueil</a>
+        <a href="configurateur-pro.html">Configurateur</a>
+        <a class="active" href="avis.html">Avis</a>
+        <a href="devis.html">Devis</a>
+        <a href="paiement.html">Paiement</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#laisser-avis">Laisser un avis</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Customer Reviews</span>
+        <h1>Votre confiance construit notre réputation.</h1>
+        <p class="lead">
+          Partagez votre expérience après une prestation RemapAuto AI.
+          Les avis publiés doivent correspondre à de vraies interventions réalisées.
+        </p>
+
+        <div class="rating-summary">
+          <span class="stars">★★★★★</span>
+          <strong>Avis clients vérifiés</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">La confiance en chiffres.</h2>
+        <p class="section-subtitle">
+          Les statistiques ci-dessous sont prêtes à être complétées avec vos chiffres réels.
+        </p>
+
+        <div class="stats">
+          <div class="stat"><strong>27+</strong><span>Années d’expérience</span></div>
+          <div class="stat"><strong>EU</strong><span>Couverture européenne</span></div>
+          <div class="stat"><strong>OEM</strong><span>Expertise diagnostic</span></div>
+          <div class="stat"><strong>5★</strong><span>Objectif satisfaction</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Avis publiés.</h2>
+        <p class="section-subtitle">
+          Remplacez les cartes ci-dessous uniquement par des avis réels, avec l’accord du client.
+        </p>
+
+        <div class="reviews-grid">
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>Emplacement réservé à un avis client vérifié.</blockquote>
+            <div class="review-meta">
+              <strong>Client vérifié</strong>
+              Véhicule et pays à renseigner
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>Emplacement réservé à un avis client vérifié.</blockquote>
+            <div class="review-meta">
+              <strong>Client vérifié</strong>
+              Véhicule et pays à renseigner
+            </div>
+          </article>
+
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>Emplacement réservé à un avis client vérifié.</blockquote>
+            <div class="review-meta">
+              <strong>Client vérifié</strong>
+              Véhicule et pays à renseigner
+            </div>
+          </article>
+        </div>
+
+        <div class="empty-note" style="margin-top:18px">
+          Conseil : publiez uniquement des avis authentiques. Cela protège la crédibilité de RemapAuto AI.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="laisser-avis">
+      <div class="container">
+        <div class="form-panel">
+          <div>
+            <span class="eyebrow">Leave a Review</span>
+            <h2 class="section-title">Partagez votre expérience.</h2>
+            <p class="section-subtitle">
+              Le formulaire prépare un e-mail adressé à RemapAuto AI. L’avis sera vérifié avant publication.
+            </p>
+
+            <div class="actions">
+              <a class="btn btn-whatsapp" href="https://web.whatsapp.com/send?phone=491745991491&text=Bonjour%20RemapAuto%20AI%2C%20je%20souhaite%20laisser%20un%20avis." target="_blank" rel="noopener">
+                Envoyer par WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <form class="form-grid" id="reviewForm">
+            <div class="field">
+              <label for="name">Nom ou prénom</label>
+              <input id="name" name="name" required>
+            </div>
+
+            <div class="field">
+              <label for="country">Pays</label>
+              <input id="country" name="country" required>
+            </div>
+
+            <div class="field">
+              <label for="vehicle">Véhicule</label>
+              <input id="vehicle" name="vehicle" placeholder="Exemple : Audi A4 2.0 TDI" required>
+            </div>
+
+            <div class="field">
+              <label for="rating">Note</label>
+              <select id="rating" name="rating" required>
+                <option value="5">★★★★★ — 5/5</option>
+                <option value="4">★★★★☆ — 4/5</option>
+                <option value="3">★★★☆☆ — 3/5</option>
+                <option value="2">★★☆☆☆ — 2/5</option>
+                <option value="1">★☆☆☆☆ — 1/5</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="service">Prestation réalisée</label>
+              <input id="service" name="service" placeholder="Diagnostic, codage, Stage 1, Stage 2...">
+            </div>
+
+            <div class="field full">
+              <label for="review">Votre avis</label>
+              <textarea id="review" name="review" required></textarea>
+            </div>
+
+            <div class="field full">
+              <label>
+                <input type="checkbox" id="consent" required style="width:auto;margin-right:8px">
+                J’autorise RemapAuto AI à me contacter pour vérifier cet avis avant publication.
+              </label>
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">Envoyer mon avis</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="notice">
+          Ce module ne publie pas automatiquement les avis. Il les envoie par e-mail afin que vous puissiez
+          vérifier l’intervention, obtenir l’accord du client et publier ensuite manuellement les avis authentiques.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> RemapAuto AI — Customer Reviews.
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("reviewForm");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const subject = encodeURIComponent("Nouvel avis client RemapAuto AI");
+      const body = encodeURIComponent(
+        "Nom : " + data.get("name") + "\n" +
+        "Pays : " + data.get("country") + "\n" +
+        "Véhicule : " + data.get("vehicle") + "\n" +
+        "Note : " + data.get("rating") + "/5\n" +
+        "Prestation : " + (data.get("service") || "") + "\n\n" +
+        "Avis :\n" + data.get("review") + "\n\n" +
+        "Le client autorise un contact de vérification avant publication."
+      );
+
+      window.location.href =
+        "mailto:remapauto@gmail.com?subject=" + subject + "&body=" + body;
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
