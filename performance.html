@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gains de puissance | RemapAuto AI</title>
-  <meta name="description" content="Comparez la puissance et le couple d'origine avec les gains estimés Stage 1 et Stage 2 chez RemapAuto AI.">
+  <title>Power Gains | RemapAuto AI</title>
+  <meta name="description" content="Compare original power and torque with estimated Stage 1 and Stage 2 gains at RemapAuto AI.">
   <meta name="theme-color" content="#05070b">
   <style>
     :root{
@@ -74,20 +74,40 @@
     @media(max-width:980px){.filters{grid-template-columns:repeat(2,1fr)}.brands-grid{grid-template-columns:repeat(3,1fr)}.result-grid{grid-template-columns:1fr}.menu{display:none}}
     @media(max-width:650px){.filters,.metric-grid{grid-template-columns:1fr}.brands-grid{grid-template-columns:repeat(2,1fr)}.details{grid-template-columns:1fr}.bar-row{grid-template-columns:72px 1fr 58px}}
   </style>
+
+<style>
+.phase41-language-switcher{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.phase41-language-switcher a{padding:7px 10px;border:1px solid rgba(255,255,255,.14);border-radius:999px;
+font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;text-decoration:none}
+.phase41-language-switcher a:hover,.phase41-language-switcher .active{border-color:#1ea7ff;background:rgba(30,167,255,.12);color:#fff}
+@media(max-width:650px){.phase41-language-switcher{justify-content:center;width:100%}}
+</style>
+
+
+<link rel="alternate" hreflang="fr" href="https://remapauto-ai.vercel.app/performance.html">
+<link rel="alternate" hreflang="en" href="https://remapauto-ai.vercel.app/en/performance.html">
+<link rel="alternate" hreflang="x-default" href="https://remapauto-ai.vercel.app/performance.html">
+
 </head>
 <body>
   <header class="topbar">
     <div class="container nav">
       <a class="brand" href="index.html">REMAPAUTO AI<small>GERMAN PRECISION</small></a>
       <nav class="menu">
-        <a href="index.html">Accueil</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">À propos</a>
-        <a class="active" href="performance.html">Gains de puissance</a>
-        <a href="devis.html">Devis</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="../services.html">Services</a>
+        <a href="../about.html">About</a>
+        <a class="active" href="performance.html">Power Gains</a>
+        <a href="../devis.html">Quote</a>
+        <a href="../contact.html">Contact</a>
       </nav>
-      <a class="btn btn-primary" href="devis.html">Demander un devis</a>
+
+<div class="phase41-language-switcher" aria-label="Language selector">
+  <a href="../performance.html">🇫🇷 FR</a>
+  <a class="active" href="performance.html">🇬🇧 EN</a>
+</div>
+
+      <a class="btn btn-primary" href="../devis.html">Request a Quote</a>
     </div>
   </header>
 
@@ -95,7 +115,7 @@
     <section class="hero">
       <div class="container">
         <span class="eyebrow">Performance Database</span>
-        <h1>Vehicle performance configurator.</h1>
+        <h1>Vehicle Performance Configurator.</h1>
         <p class="lead">
           Choisissez votre véhicule pour consulter les valeurs d'origine et les gains
           estimés après optimisation Stage 1 ou Stage 2.
@@ -104,25 +124,25 @@
         <div class="selector-panel">
           <div class="filters">
             <div class="field">
-              <label for="brandSelect">Marque</label>
+              <label for="brandSelect">Brand</label>
               <select id="brandSelect"></select>
             </div>
             <div class="field">
-              <label for="modelSelect">Modèle</label>
+              <label for="modelSelect">Model</label>
               <select id="modelSelect"></select>
             </div>
             <div class="field">
-              <label for="yearSelect">Génération / année</label>
+              <label for="yearSelect">Generation / Year</label>
               <select id="yearSelect"></select>
             </div>
             <div class="field">
-              <label for="engineSelect">Motorisation</label>
+              <label for="engineSelect">Engine</label>
               <select id="engineSelect"></select>
             </div>
           </div>
         </div>
 
-        <h2 class="brands-title">Marques disponibles</h2>
+        <h2 class="brands-title">Available Brands</h2>
         <div class="brands-grid" id="brandsGrid"></div>
       </div>
     </section>
@@ -133,10 +153,10 @@
 
         <div class="result-grid">
           <article class="panel">
-            <h3>Puissance & couple</h3>
+            <h3>Power & Torque</h3>
             <div class="bar-chart">
               <div class="bar-row">
-                <span>Origine</span>
+                <span>Original</span>
                 <div class="bar-track"><div class="bar original" id="barOriginal"></div></div>
                 <strong id="barOriginalValue"></strong>
               </div>
@@ -153,20 +173,20 @@
             </div>
 
             <div class="metric-grid">
-              <div class="metric"><small>Origine</small><strong id="originalPower"></strong><br><span id="originalTorque"></span></div>
+              <div class="metric"><small>Original</small><strong id="originalPower"></strong><br><span id="originalTorque"></span></div>
               <div class="metric"><small>Stage 1</small><strong id="stage1Power"></strong><br><span id="stage1Torque"></span><br><b class="gain" id="stage1Gain"></b></div>
               <div class="metric"><small>Stage 2</small><strong id="stage2Power"></strong><br><span id="stage2Torque"></span><br><b class="gain" id="stage2Gain"></b></div>
             </div>
           </article>
 
           <article class="panel">
-            <h3>Détails techniques</h3>
+            <h3>Technical Details</h3>
             <dl class="details">
-              <dt>Type moteur</dt><dd id="engineType"></dd>
-              <dt>Cylindrée</dt><dd id="engineSize"></dd>
-              <dt>Calculateur</dt><dd id="ecuType"></dd>
-              <dt>Puissance d'origine</dt><dd id="detailsOriginalPower"></dd>
-              <dt>Couple d'origine</dt><dd id="detailsOriginalTorque"></dd>
+              <dt>Engine Type</dt><dd id="engineType"></dd>
+              <dt>Displacement</dt><dd id="engineSize"></dd>
+              <dt>ECU</dt><dd id="ecuType"></dd>
+              <dt>Original Power</dt><dd id="detailsOriginalPower"></dd>
+              <dt>Original Torque</dt><dd id="detailsOriginalTorque"></dd>
             </dl>
 
             <div class="notice">
@@ -176,8 +196,8 @@
             </div>
 
             <div class="actions">
-              <a class="btn btn-primary" href="devis.html">Demander un devis personnalisé</a>
-              <a class="btn btn-ghost" id="whatsappPerformance" href="#" target="_blank" rel="noopener">Contacter sur WhatsApp</a>
+              <a class="btn btn-primary" href="../devis.html">Request a Personalized Quote</a>
+              <a class="btn btn-ghost" id="whatsappPerformance" href="#" target="_blank" rel="noopener">Contact on WhatsApp</a>
             </div>
           </article>
         </div>
@@ -190,8 +210,8 @@
   </footer>
 
   <script>
-    // Base de démonstration Phase 3.1.
-    // Les valeurs peuvent être complétées progressivement avec les données validées par RemapAuto AI.
+    // Phase 3.1 demonstration database.
+    // The values can be expanded progressively with data validated by RemapAuto AI.
     const vehicles = [
       {
         brand: "Audi", model: "A3 8V", year: "2012–2020", engine: "2.0 TDI 150 hp",
