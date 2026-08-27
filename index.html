@@ -984,6 +984,90 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
 }
 </style>
 
+
+<style>
+/* REMAPAUTO AI — Professional Network section */
+.partner-network{
+  position:relative;
+  overflow:hidden;
+  padding:96px 0;
+  background:
+    radial-gradient(circle at 12% 20%,rgba(0,132,255,.18),transparent 30%),
+    radial-gradient(circle at 88% 22%,rgba(20,102,255,.12),transparent 28%),
+    linear-gradient(180deg,#020812 0%,#04101f 52%,#02070e 100%);
+  border-top:1px solid rgba(30,167,255,.2);
+  border-bottom:1px solid rgba(30,167,255,.2);
+}
+.partner-network:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;
+  background-image:
+    linear-gradient(rgba(30,167,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(30,167,255,.08) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 18%,black 82%,transparent 100%);
+}
+.partner-network .container{position:relative;z-index:1}
+.partner-intro{text-align:center;max-width:940px;margin:0 auto 46px}
+.partner-kicker{display:inline-flex;align-items:center;gap:10px;color:#29a8ff;font-size:.78rem;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.partner-kicker:before,.partner-kicker:after{content:"";width:36px;height:2px;background:linear-gradient(90deg,#1ea7ff,#ff3651)}
+.partner-intro h2{margin-top:14px;font-size:clamp(2.25rem,5vw,4.5rem);line-height:.98;letter-spacing:-.045em;text-transform:uppercase}
+.partner-intro h2 span{color:#168cff;text-shadow:0 0 30px rgba(22,140,255,.3)}
+.partner-intro p{max-width:790px;margin:20px auto 0;color:#bdc9d8;font-size:1.06rem}
+.partner-showcase{display:grid;grid-template-columns:.95fr 1.05fr;gap:28px;align-items:stretch}
+.partner-visual{position:relative;min-height:640px;border-radius:28px;overflow:hidden;border:1px solid rgba(42,159,255,.34);background:#07111d;box-shadow:0 32px 90px rgba(0,0,0,.46),inset 0 0 0 1px rgba(255,255,255,.025)}
+.partner-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.72) contrast(1.08) brightness(.72)}
+.partner-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,89,255,.08),rgba(1,8,18,.08) 38%,rgba(1,8,18,.82) 100%)}
+.partner-visual-brand{position:absolute;z-index:2;left:28px;right:28px;bottom:28px;padding:22px;border:1px solid rgba(41,168,255,.34);border-radius:20px;background:rgba(3,11,23,.8);backdrop-filter:blur(16px)}
+.partner-visual-brand strong{display:block;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase}
+.partner-visual-brand span{display:block;margin-top:5px;color:#65beff;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase}
+.partner-panel{padding:42px;border-radius:28px;border:1px solid rgba(42,159,255,.27);background:linear-gradient(145deg,rgba(11,23,42,.95),rgba(3,10,19,.96));box-shadow:0 30px 80px rgba(0,0,0,.34)}
+.partner-panel .mini-title{color:#168cff;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.88rem}
+.partner-panel h3{margin-top:10px;font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.05;text-transform:uppercase}
+.partner-panel .partner-lead{margin-top:16px;color:#c2cedd;font-size:1.02rem}
+.partner-list{display:grid;gap:0;margin-top:28px;border-top:1px solid rgba(255,255,255,.08)}
+.partner-list li{list-style:none;position:relative;padding:13px 10px 13px 29px;border-bottom:1px solid rgba(255,255,255,.07);color:#d9e5f2}
+.partner-list li:before{content:"›";position:absolute;left:5px;top:9px;color:#1ea7ff;font-size:1.55rem;font-weight:900;text-shadow:0 0 16px rgba(30,167,255,.7)}
+.partner-solutions{margin-top:27px;padding:19px;border-radius:18px;border:1px solid rgba(30,167,255,.2);background:rgba(30,167,255,.055)}
+.partner-solutions strong{display:block;color:#39adff;text-transform:uppercase;letter-spacing:.09em;font-size:.88rem}
+.partner-solutions span{display:block;margin-top:8px;color:#dce8f4;line-height:1.7}
+.partner-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.partner-action{display:flex;align-items:center;justify-content:center;min-height:54px;padding:0 18px;border-radius:14px;font-weight:900;text-align:center;transition:.25s ease}
+.partner-action.primary{background:linear-gradient(135deg,#149bff,#0067db);box-shadow:0 16px 36px rgba(0,103,219,.28)}
+.partner-action.secondary{border:1px solid rgba(30,167,255,.5);background:rgba(30,167,255,.06);color:#83caff}
+.partner-action:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.partner-why{text-align:center;margin-top:68px}
+.partner-why h3{font-size:clamp(2rem,4vw,3.25rem);text-transform:uppercase;letter-spacing:-.03em}
+.partner-why h3 span{color:#1e9cff}
+.partner-benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+.partner-benefit{padding:28px 22px;border:1px solid rgba(42,159,255,.27);border-radius:20px;background:linear-gradient(180deg,rgba(12,26,46,.86),rgba(4,12,22,.9));transition:.25s ease}
+.partner-benefit:hover{transform:translateY(-5px);border-color:rgba(42,159,255,.6);box-shadow:0 18px 50px rgba(0,95,255,.12)}
+.partner-benefit .p-icon{width:58px;height:58px;margin:0 auto 17px;border-radius:16px;display:grid;place-items:center;border:1px solid rgba(30,167,255,.35);background:rgba(30,167,255,.08);color:#2baaff;font-size:1.55rem;font-weight:900}
+.partner-benefit h4{text-transform:uppercase;font-size:1rem;letter-spacing:.025em}
+.partner-benefit p{margin-top:10px;color:#aebdce;font-size:.9rem}
+.partner-join{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:24px;padding:26px 28px;border-radius:22px;border:1px solid rgba(42,159,255,.32);background:linear-gradient(100deg,rgba(5,18,33,.96),rgba(8,27,49,.92))}
+.partner-join .join-icon{font-size:2.4rem;filter:drop-shadow(0 0 15px rgba(30,167,255,.35))}
+.partner-join strong{display:block;font-size:1.22rem;text-transform:uppercase;letter-spacing:.04em;color:#dceeff}
+.partner-join p{margin-top:4px;color:#aebdce}
+.partner-join a{min-width:210px}
+@media(max-width:980px){
+  .partner-showcase{grid-template-columns:1fr}
+  .partner-visual{min-height:560px}
+  .partner-benefits{grid-template-columns:repeat(2,1fr)}
+  .partner-join{grid-template-columns:auto 1fr}.partner-join a{grid-column:1/-1;width:100%}
+}
+@media(max-width:650px){
+  .partner-network{padding:70px 0}
+  .partner-showcase{gap:18px}
+  .partner-visual{min-height:470px;border-radius:22px}
+  .partner-visual-brand{left:16px;right:16px;bottom:16px;padding:17px}
+  .partner-panel{padding:25px 20px;border-radius:22px}
+  .partner-actions,.partner-benefits{grid-template-columns:1fr}
+  .partner-why{margin-top:48px}
+  .partner-join{grid-template-columns:1fr;text-align:center;padding:23px 20px}
+  .partner-join .join-icon{margin:auto}
+}
+</style>
+
 <link rel="stylesheet" href="chatbot.css"></head>
 
 <body>
@@ -1222,6 +1306,91 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
         </div>
       </div>
     </section>
+
+
+    <section class="partner-network" id="partner-network">
+      <div class="container">
+        <div class="partner-intro reveal">
+          <span class="partner-kicker">RemapAuto AI Professional Network</span>
+          <h2>Who <span>RemapAuto AI</span> is built for</h2>
+          <p>For professionals who demand precision, reliability and advanced automotive technology — with technical support designed to help workshops grow with confidence.</p>
+        </div>
+
+        <div class="partner-showcase">
+          <div class="partner-visual reveal">
+            <img src="ricardo-porsche-training.jpg" alt="RemapAuto AI technical expertise and professional automotive training">
+            <div class="partner-visual-brand">
+              <strong>Experience backed by real technical training</strong>
+              <span>Premium automotive technology • OEM expertise • European support</span>
+            </div>
+          </div>
+
+          <div class="partner-panel reveal">
+            <span class="mini-title">Built for professional automotive businesses</span>
+            <h3>One partner.<br>Multiple solutions.</h3>
+            <p class="partner-lead">RemapAuto AI supports workshops and automotive professionals who want serious technical capability without compromising quality.</p>
+
+            <ul class="partner-list">
+              <li>Performance and tuning workshops</li>
+              <li>Automotive diagnostic specialists</li>
+              <li>ECU &amp; TCU programming professionals</li>
+              <li>EV &amp; Hybrid repair specialists</li>
+              <li>Workshops requiring OEM diagnostic support</li>
+              <li>Businesses looking for remote technical assistance</li>
+              <li>Professionals expanding services without investing in every OEM tool</li>
+            </ul>
+
+            <div class="partner-solutions">
+              <strong>Professional capability, wherever you work</strong>
+              <span>ECU &amp; TCU Calibration • OEM Diagnostics • Coding &amp; Programming • Remote Services</span>
+            </div>
+
+            <div class="partner-actions">
+              <a class="partner-action primary" href="#contact">Become a RemapAuto AI Partner</a>
+              <a class="partner-action secondary" href="#devis">Request Professional Access</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="partner-why reveal">
+          <span class="partner-kicker">Why partner with us</span>
+          <h3>RemapAuto <span>AI</span></h3>
+        </div>
+
+        <div class="partner-benefits">
+          <article class="partner-benefit reveal">
+            <div class="p-icon">27+</div>
+            <h4>Years Experience</h4>
+            <p>More than 27 years of hands-on experience in high-end automotive technology.</p>
+          </article>
+          <article class="partner-benefit reveal">
+            <div class="p-icon">OEM</div>
+            <h4>OEM-Level Expertise</h4>
+            <p>Advanced diagnostics, coding, programming and manufacturer-level technical workflows.</p>
+          </article>
+          <article class="partner-benefit reveal">
+            <div class="p-icon">EU</div>
+            <h4>European Remote Support</h4>
+            <p>Professional remote technical assistance across Europe with fast, structured support.</p>
+          </article>
+          <article class="partner-benefit reveal">
+            <div class="p-icon">EV</div>
+            <h4>EV &amp; Hybrid Technology</h4>
+            <p>Specialized knowledge of high-voltage, hybrid and latest-generation vehicle technologies.</p>
+          </article>
+        </div>
+
+        <div class="partner-join reveal">
+          <div class="join-icon">🤝</div>
+          <div>
+            <strong>Stronger together. Higher standard.</strong>
+            <p>Join the RemapAuto AI professional network and expand the solutions you can offer your customers.</p>
+          </div>
+          <a class="partner-action secondary" href="#contact">Join the Network</a>
+        </div>
+      </div>
+    </section>
+
 
     <section class="section">
       <div class="container">
