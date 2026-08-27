@@ -905,7 +905,29 @@
       }
     }
 
-  </style>
+  
+/* Partner application modal */
+.partner-action{font-size:.88rem;line-height:1.2;letter-spacing:.015em;min-height:50px;padding:0 14px}
+.partner-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,5,13,.78);backdrop-filter:blur(12px)}
+.partner-modal.open{display:flex}
+.partner-modal:target{display:flex}
+.partner-modal-card{width:min(760px,100%);max-height:92vh;overflow:auto;border:1px solid rgba(30,167,255,.38);border-radius:24px;background:linear-gradient(145deg,#081528,#030a13);box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 60px rgba(0,114,255,.12)}
+.partner-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px 26px;border-bottom:1px solid rgba(255,255,255,.08)}
+.partner-modal-head span{display:block;color:#39adff;font-size:.74rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.partner-modal-head h3{margin-top:6px;font-size:1.65rem;text-transform:uppercase}
+.partner-modal-close{width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;font-size:1.35rem;cursor:pointer}
+.partner-form{padding:24px 26px 28px}
+.partner-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.partner-form .full{grid-column:1/-1}
+.partner-form label{display:grid;gap:7px;color:#dcecff;font-size:.8rem;font-weight:800}
+.partner-form input,.partner-form select,.partner-form textarea{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:13px;background:#06101e;color:#fff;padding:13px 14px;font:inherit;outline:none}
+.partner-form input:focus,.partner-form select:focus,.partner-form textarea:focus{border-color:#1ea7ff;box-shadow:0 0 0 3px rgba(30,167,255,.10)}
+.partner-form textarea{min-height:110px;resize:vertical}
+.partner-form-note{margin-top:14px;color:#91a6bd;font-size:.8rem}
+.partner-form-submit{width:100%;margin-top:18px;min-height:54px;border:0;border-radius:14px;background:linear-gradient(135deg,#149bff,#0067db);color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;box-shadow:0 16px 36px rgba(0,103,219,.28)}
+@media(max-width:650px){.partner-form-grid{grid-template-columns:1fr}.partner-form .full{grid-column:auto}.partner-modal-head,.partner-form{padding-left:18px;padding-right:18px}}
+
+</style>
 
 <style>
 .phase41-language-switcher{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -1346,8 +1368,8 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
             </div>
 
             <div class="partner-actions">
-              <a class="partner-action primary" href="#contact">Become a RemapAuto AI Partner</a>
-              <a class="partner-action secondary" href="#devis">Request Professional Access</a>
+              <a class="partner-action primary" href="#partnerModal">Become a RemapAuto AI Partner</a>
+              <a class="partner-action secondary" href="#partnerModal">Request Professional Access</a>
             </div>
           </div>
         </div>
@@ -1386,7 +1408,7 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
             <strong>Stronger together. Higher standard.</strong>
             <p>Join the RemapAuto AI professional network and expand the solutions you can offer your customers.</p>
           </div>
-          <a class="partner-action secondary" href="#contact">Join the Network</a>
+          <a class="partner-action secondary" href="#partnerModal">Join the Network</a>
         </div>
       </div>
     </section>
@@ -1805,5 +1827,36 @@ font-size:.78rem;font-weight:800;background:rgba(255,255,255,.04);color:#dce8f6;
     });
 
   </script>
+
+<div class="partner-modal" id="partnerModal" aria-hidden="true">
+  <div class="partner-modal-card" role="dialog" aria-modal="true" aria-labelledby="partnerModalTitle">
+    <div class="partner-modal-head">
+      <div><span>RemapAuto AI Professional Network</span><h3 id="partnerModalTitle">Professional Partner Request</h3></div>
+      <a class="partner-modal-close" href="#partner-network" id="partnerModalClose" aria-label="Close">×</a>
+    </div>
+    <form class="partner-form" id="partnerApplicationForm" action="mailto:remapauto@gmail.com" method="post" enctype="text/plain">
+      <div class="partner-form-grid">
+        <label class="full">Request type<select name="requestType" id="partnerRequestType" required><option>Partner Application</option><option>Professional Access</option><option>Join the Network</option></select></label>
+      </div>
+      <div class="partner-form-grid">
+        <label>Full name<input name="name" required autocomplete="name"></label>
+        <label>Company / Workshop<input name="company" required autocomplete="organization"></label>
+        <label>Country<input name="country" required autocomplete="country-name"></label>
+        <label>WhatsApp / Phone<input name="phone" required autocomplete="tel"></label>
+        <label class="full">Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Business type<select name="businessType" required><option value="">Select...</option><option>Tuning / Performance Workshop</option><option>Automotive Diagnostics</option><option>ECU / TCU Programming</option><option>EV & Hybrid Specialist</option><option>General Workshop</option><option>Other Automotive Business</option></select></label>
+        <label>Main interest<select name="interest" required><option value="">Select...</option><option>ECU & TCU Calibration</option><option>OEM Diagnostics</option><option>Coding & Programming</option><option>Remote Technical Support</option><option>Professional Partner Network</option><option>Multiple Services</option></select></label>
+        <label class="full">Message<textarea name="message" placeholder="Tell us about your workshop, experience and what you need from RemapAuto AI."></textarea></label>
+      </div>
+      <p class="partner-form-note">After submitting, your email application opens addressed to RemapAuto AI so you can review it before sending.</p>
+      <button class="partner-form-submit" type="submit">Send Professional Request</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// Partner form uses CSS :target so buttons work even if JavaScript is unavailable.
+</script>
+
 <script src="chatbot.js"></script></body>
 </html>
